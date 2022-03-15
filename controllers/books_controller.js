@@ -72,4 +72,26 @@ books.get('/:title', (req, res) => {
     })
 })
 
+// PATCH
+books.patch('/:id', (req, res) => {
+  Book.findByIdAndUpdate(req.params.id, req.body)
+      .then(() => {
+          res.json(`/books/${req.params.id}`)
+      })
+      .catch(err => {
+          res.json('err', err)
+      })
+})
+
+// DELETE
+books.delete('/:id', (req, res) => {
+  Book.findByIdAndDelete(req.params.id)
+      .then(() => {
+          res.json(`${req.params.id} successfully deleted`)
+      })
+      .catch(err => {
+          res.json('err', err)
+      })
+})
+
 module.exports = books
