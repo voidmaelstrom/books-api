@@ -3,6 +3,52 @@ const books = express.Router()
 const db = require('../models')
 const Book = require('../models/books')
 
+// Seed:
+books.get('/seed', (req, res) => {
+  Book.insertMany([
+    {
+      "title": "1984",
+      "description": "A startling and haunting novel, 1984 creates an imaginary world that is completely convincing from start to finish.",
+      "year": 1949,
+      "quantity": 10,
+      "imageURL": "../assets/1984.jpg"
+    },
+    {
+      "title": "Ender's Game",
+      "description": "The survival of humanity depends on a military genius who can defeat the aliens. But who?",
+      "year": 1985,
+      "quantity": 15,
+      "imageURL": "../assets/endersgame.jpg"
+    },
+    {
+      "title": "Hitchhiker's Guide to the Galaxy",
+      "description": "It’s an ordinary Thursday morning for Arthur Dent . . . until his house gets demolished. The Earth follows shortly after to make way for a new hyperspace express route, and Arthur’s best friend has just announced that he’s an alien.",
+      "year": 1979,
+      "quantity": 25,
+      "imageURL": "../assets/hitchhikersguidetothegalaxy.jpg"
+    },
+    {
+      "title": "Neuromancer",
+      "description": "Before the Internet was commonplace, William Gibson showed us the Matrix—a world within the world, the representation of every byte of data in cyberspace.",
+      "year": 1962,
+      "quantity": 20,
+      "imageURL": "../assets/neuromancer.jpg"
+    },
+    {
+      "title": "Ringworld",
+      "description": "A new place is being built, a world of huge dimensions, encompassing millions of miles, stronger than any planet before it. There is gravity, and with high walls and its proximity to the sun, a livable new planet that is three million times the area of the Earth can be formed. We can start again!",
+      "year": 1970,
+      "quantity": 5,
+      "imageURL":"../assets/ringworld.jpg"
+    }
+  ])
+  .then(createdBooks => {
+    res.json({
+      message: "Successfully seeded books!"
+    })
+  })
+})
+
 // Index:
 books.get('/', (req, res) => {
   Book.find()
